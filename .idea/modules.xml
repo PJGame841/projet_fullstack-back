@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/models.iml" filepath="$PROJECT_DIR$/models.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/projet_fullstack-back.iml" filepath="$PROJECT_DIR$/.idea/projet_fullstack-back.iml" />
+      <module fileurl="file://$PROJECT_DIR$/routes.iml" filepath="$PROJECT_DIR$/routes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src.iml" filepath="$PROJECT_DIR$/src.iml" />
+      <module fileurl="file://$PROJECT_DIR$/startup.iml" filepath="$PROJECT_DIR$/startup.iml" />
+    </modules>
+  </component>
+</project>
