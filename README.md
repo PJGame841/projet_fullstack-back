@@ -34,3 +34,9 @@ npm install -g pnpm
 pnpm install
 pnpm run dev
 ```
+
+### Création d'un dump de la base de données
+
+```
+mongodump --uri="http://localhost:27017/projet_back" --out ~/mongo_dump
+```

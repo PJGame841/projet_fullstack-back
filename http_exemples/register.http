@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+// ATTENTION à remplacer l'accessKey par la valeur de APP_REGISTER_KEY
+{
+  "accessKey": "pj28122002",
+  "username": "pj",
+  "password": "pj"
+}
