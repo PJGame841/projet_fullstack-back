@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { validateId } = require('../middlewares/validate');
+const { isAuthenticated } = require('../middlewares/auth');
 const Project = require('../models/project');
 
 const router = Router();
@@ -9,7 +10,7 @@ router.get('/', async (req, res) => {
     res.send({ valid: true, data: projects });
 });
 
-router.get('/:id', validateId('id'), async (req, res) => {
+router.get('/:id', [isAuthenticated, validateId('id')], async (req, res) => {
     const project = await Project.findById(req.params.id);
     if (!project) {
         return res.status(404).send({ valid: false, message: "Project not found for the given id !"});
@@ -18,7 +19,7 @@ router.get('/:id', validateId('id'), async (req, res) => {
     res.send({ valid: true, data: project });
 });
 
-router.post('/', async (req, res) => {
+router.post('/', isAuthenticated, async (req, res) => {
     const project = new Project(req.body);
     try {
         await project.save();
@@ -28,7 +29,7 @@ router.post('/', async (req, res) => {
     res.send({ valid: true, data: project });
 });
 
-router.put('/:id', validateId('id'), async (req, res) => {
+router.put('/:id', [isAuthenticated, validateId('id')], async (req, res) => {
     const project = await Project.findByIdAndUpdate(req.params.id, req.body);
     if (!project) {
         return res.status(404).send({ valid: false, message: "Project not found for the given id !"});
@@ -37,7 +38,7 @@ router.put('/:id', validateId('id'), async (req, res) => {
     res.send({ valid: true, data: project });
 });
 
-router.delete('/:id', validateId('id'), async (req, res) => {
+router.delete('/:id', [isAuthenticated, validateId('id')], async (req, res) => {
     const project = await Project.findByIdAndDelete(req.params.id);
     if (!project) {
         return res.status(404).send({ valid: false, message: "Project not found for the given id !"});
