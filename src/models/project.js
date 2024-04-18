@@ -30,6 +30,9 @@ const projectSchema = new Schema({
     },
     click_count: {
         type: Number
+    },
+    view_time: {
+        type: Number
     }
 });
 
