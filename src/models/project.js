@@ -28,6 +28,9 @@ const projectSchema = new Schema({
         }],
         validate: [arrayLimit, '{PATH} exceeds the limit of 5']
     },
+    click_count: {
+        type: Number
+    }
 });
 
 function arrayLimit(val) {

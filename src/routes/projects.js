@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { ObjectId } = require('mongoose').Types;
+const { validateId } = require('../middlewares/validate');
 const Project = require('../models/project');
 
 const router = Router();
@@ -9,16 +9,12 @@ router.get('/', async (req, res) => {
     res.send({ valid: true, data: projects });
 });
 
-router.get('/:id', async (req, res) => {
-    if (!req.params.id) {
-        return res.status(400).send({ valid: false, message: 'Project ID is required' });
-    }
-
-    if (!ObjectId.isValid(req.params.id)) {
-        return res.status(400).send({ valid: false, message: 'Invalid Project ID' });
-    }
-
+router.get('/:id', validateId('id'), async (req, res) => {
     const project = await Project.findById(req.params.id);
+    if (!project) {
+        return res.status(404).send({ valid: false, message: "Project not found for the given id !"});
+    }
+
     res.send({ valid: true, data: project });
 });
 
@@ -32,30 +28,21 @@ router.post('/', async (req, res) => {
     res.send({ valid: true, data: project });
 });
 
-router.put('/:id', async (req, res) => {
-    if (!req.params.id) {
-        return res.status(400).send({ valid: false, message: 'Project ID is required' });
-    }
-
-    if (!ObjectId.isValid(req.params.id)) {
-        return res.status(400).send({ valid: false, message: 'Invalid Project ID' });
-    }
-
+router.put('/:id', validateId('id'), async (req, res) => {
     const project = await Project.findByIdAndUpdate(req.params.id, req.body);
+    if (!project) {
+        return res.status(404).send({ valid: false, message: "Project not found for the given id !"});
+    }
 
     res.send({ valid: true, data: project });
 });
 
-router.delete('/:id', async (req, res) => {
-    if (!req.params.id) {
-        return res.status(400).send({ valid: false, message: 'Project ID is required' });
-    }
-
-    if (!ObjectId.isValid(req.params.id)) {
-        return res.status(400).send({ valid: false, message: 'Invalid Project ID' });
-    }
-
+router.delete('/:id', validateId('id'), async (req, res) => {
     const project = await Project.findByIdAndDelete(req.params.id);
+    if (!project) {
+        return res.status(404).send({ valid: false, message: "Project not found for the given id !"});
+    }
+
     res.send({ valid: true, data: project });
 });
 
