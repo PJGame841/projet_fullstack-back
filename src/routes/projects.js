@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     res.send({ valid: true, data: projects });
 });
 
-router.get('/:id', [isAuthenticated, validateId('id')], async (req, res) => {
+router.get('/:id', [validateId('id')], async (req, res) => {
     const project = await Project.findById(req.params.id);
     if (!project) {
         return res.status(404).send({ valid: false, message: "Project not found for the given id !"});
