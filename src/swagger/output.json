@@ -5,8 +5,14 @@
     "title": "PJ Portfolio API",
     "description": "API pour le portfolio de Pierre-Jean Lefort"
   },
-  "host": "localhost:3000",
-  "basePath": "/api/",
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/"
+    },
+    {
+      "url": "http://localhost/api/"
+    }
+  ],
   "schemes": [
     "http"
   ],
@@ -14,7 +20,8 @@
     "securitySchemes": {
       "BearerHttp": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     },
     "schemas": {
@@ -204,6 +211,9 @@
                     "data": {
                       "type": "object",
                       "properties": {
+                        "valid": {
+                          "type": ["boolean"]
+                        },
                         "user": {
                           "$ref": "#/components/schemas/User"
                         },
