@@ -9,5 +9,7 @@ RUN pnpm install
 
 COPY . /usr/src/app
 
+RUN touch .env
+
 EXPOSE 3000
 CMD ["pnpm", "start"]
